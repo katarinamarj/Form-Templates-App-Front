@@ -15,6 +15,11 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, { username, password });
   }
 
+  isLoggedIn(): boolean {
+    const token = this.getToken();
+    return !!token;
+  }
+
   logout(): void {
     localStorage.removeItem('token');
   }
@@ -26,4 +31,7 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('token');
   }
+
+  
+  
 }

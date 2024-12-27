@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+
+
 })
 export class AppComponent  {
   
