@@ -10,6 +10,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from './ui-material.module';
 import { FormsModule } from '@angular/forms';
 import { FormTemplatesComponent } from './components/form-templates/form-templates.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FormTemplatesComponent } from './components/form-templates/form-templat
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    MatPaginatorModule
   ],
   providers: [
     provideClientHydration(withEventReplay()),

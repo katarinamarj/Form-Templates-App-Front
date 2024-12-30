@@ -23,8 +23,18 @@ export class FormTemplateService {
     return this.http.post<any>(this.apiUrl, data);
   }
 
+  updateFormTemplate(template: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${template.id}`, template);
+  }
+  
+  deleteFormTemplate(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.error('Error fetching templates:', error);
     return throwError(() => new Error('Failed to fetch templates'));
   }
+
+  
 }

@@ -1,46 +1,53 @@
-<section fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="2rem" style="margin-bottom: 6.5rem;">
-  <div fxFlex="40" fxFlex.xs="100" style="border-right: 1px solid #ccc; padding-right: 1rem;">
-    <h2>Templates</h2>
-    <ul>
-      <li *ngFor="let template of formTemplates" style="word-wrap: break-word; white-space: pre-wrap;">
-        <strong>{{ template.name }}</strong>: {{ template.description }}
-      </li>
-    </ul>
-  </div>
+<div>
+  <h2>{{ newFormTemplate.id ? 'Edit Template' : 'Create New Form Template' }}</h2>
+  <form (ngSubmit)="saveTemplate()">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput id="name" type="text" [(ngModel)]="newFormTemplate.name" name="name" placeholder="Enter template name" required #nameInput="ngModel">
+      <mat-error *ngIf="nameInput.hasError('required')">Name is required</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput  id="description" [(ngModel)]="newFormTemplate.description" name="description" placeholder="Enter template description" #descriptionInput="ngModel"></textarea>
+      <mat-error *ngIf="descriptionInput.hasError('maxlength')">
+        Description cannot exceed 250 characters
+      </mat-error>
+    </mat-form-field>
+    
+    <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    style="margin-top: 10px; background-color: rgb(59, 48, 49); width: 200px;">{{ newFormTemplate.id ? 'Update' : 'Create' }}
+  </button>
+  </form>
 
-  <div fxFlex="60" fxFlex.xs="100" style="padding-left: 1rem;">
-    <h2>Create New Form Template</h2>
-    <form #f="ngForm" (ngSubmit)="createFormTemplate()" fxLayout="column" fxLayoutAlign="start stretch">
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input
-          matInput
-          type="text"
-          [(ngModel)]="newFormTemplate.name"
-          name="name"
-          required
-          #nameInput="ngModel"
-        />
-        <mat-error *ngIf="nameInput.hasError('required')">Name is required</mat-error>
-      </mat-form-field>
+  <h2>Templates</h2>
+  <table mat-table  [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%; margin-top: 20px;">
 
-      <mat-form-field>
-        <mat-label>Description</mat-label>
-        <textarea
-          matInput
-          [(ngModel)]="newFormTemplate.description"
-          name="description"
-          rows="2"
-          style="resize: none; overflow: auto;"></textarea>
-      </mat-form-field>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let template">{{ template.name }}</td>
+    </ng-container>
 
-      <button
-        type="submit"
-        mat-raised-button
-        color="primary"
-        style="background-color: rgb(59, 48, 49); width: 200px; margin-top: 20px;">
-        Create
-      </button>
-    </form>
-  </div>
-</section>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let template">{{ template.description }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let template">
+        <button mat-button color="primary" (click)="editTemplate(template)">Edit</button>
+        <button mat-button color="warn" (click)="deleteTemplate(template.id)">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+
+</div>
