@@ -9,12 +9,15 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from './ui-material.module';
 import { FormsModule } from '@angular/forms';
+import { FormTemplatesComponent } from './components/form-templates/form-templates.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    FormTemplatesComponent
+
   ],
   imports: [
     BrowserModule,

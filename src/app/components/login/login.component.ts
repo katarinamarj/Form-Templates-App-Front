@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent {
   errorMessage: string | null = null;
 
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router:Router) {}
 
   onSubmit(form: NgForm) {
     if (form.valid) {
@@ -21,7 +22,7 @@ export class LoginComponent {
       this.authService.login(username, password).subscribe({
         next: (response: any) => {
           this.authService.storeToken(response.token);
-          alert('Login successful!');
+          this.router.navigate(['/form-template']);
         },
         error: (error) => {
           this.errorMessage = 'Invalid username or password.';

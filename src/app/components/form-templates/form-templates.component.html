@@ -1,0 +1,46 @@
+<section fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="2rem" style="margin-bottom: 6.5rem;">
+  <div fxFlex="40" fxFlex.xs="100" style="border-right: 1px solid #ccc; padding-right: 1rem;">
+    <h2>Templates</h2>
+    <ul>
+      <li *ngFor="let template of formTemplates" style="word-wrap: break-word; white-space: pre-wrap;">
+        <strong>{{ template.name }}</strong>: {{ template.description }}
+      </li>
+    </ul>
+  </div>
+
+  <div fxFlex="60" fxFlex.xs="100" style="padding-left: 1rem;">
+    <h2>Create New Form Template</h2>
+    <form #f="ngForm" (ngSubmit)="createFormTemplate()" fxLayout="column" fxLayoutAlign="start stretch">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="newFormTemplate.name"
+          name="name"
+          required
+          #nameInput="ngModel"
+        />
+        <mat-error *ngIf="nameInput.hasError('required')">Name is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="newFormTemplate.description"
+          name="description"
+          rows="2"
+          style="resize: none; overflow: auto;"></textarea>
+      </mat-form-field>
+
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        style="background-color: rgb(59, 48, 49); width: 200px; margin-top: 20px;">
+        Create
+      </button>
+    </form>
+  </div>
+</section>
