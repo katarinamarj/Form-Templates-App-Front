@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormTemplateService } from '../../services/form-template.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { FormPreviewDialogComponent } from '../form-preview-dialog/form-preview-dialog.component';
 
 @Component({
   selector: 'app-form-templates',
@@ -29,7 +31,7 @@ export class FormTemplatesComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private formTemplateService: FormTemplateService) {}
+  constructor(private formTemplateService: FormTemplateService,  public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadFormTemplates();
@@ -104,5 +106,14 @@ export class FormTemplatesComponent implements OnInit, AfterViewInit {
       });
     }
   }
+
+  openPreviewDialog(template: any): void {
+    this.dialog.open(FormPreviewDialogComponent, {
+      width: '70%',  
+      height: '70%',  
+      data: { fields: template.fields }  
+    });
+  }
+  
 
 }

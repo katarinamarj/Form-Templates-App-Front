@@ -109,7 +109,7 @@
         <td mat-cell *matCellDef="let template">
           <button mat-button color="primary" (click)="editTemplate(template)">Edit</button>
           <button mat-button color="warn" (click)="deleteTemplate(template.id)">Delete</button>
-          <button mat-button color="warn">Preview</button>
+          <button mat-button color="warn" (click)="openPreviewDialog(template)">Preview</button>
         </td>
       </ng-container>
   

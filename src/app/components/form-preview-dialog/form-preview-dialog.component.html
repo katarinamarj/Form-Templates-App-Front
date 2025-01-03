@@ -1,0 +1,23 @@
+<h2 class="dialog-title">Preview Form
+    <mat-icon class="close-icon" (click)="closeDialog()">close</mat-icon>
+</h2>
+
+<div class="dialog-content">
+  <form [formGroup]="formGroup" >
+    <div *ngFor="let field of data.fields" class="form-field">
+      <label>{{ field.label }}</label>
+
+      <input *ngIf="field.type === 'text'" type="text" formControlName="{{ field.label }}" placeholder="Enter text" />
+
+      <input *ngIf="field.type === 'checkbox'" type="checkbox" class="custom-checkbox" formControlName="{{ field.label }}" />
+
+      <select *ngIf="field.type === 'dropdown'" formControlName="{{ field.label }}">
+        <option *ngFor="let option of field.options.split(',')">{{ option.trim() }}</option>
+      </select>
+    </div>
+  </form>
+</div>
+
+<div class="dialog-footer">
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</div>

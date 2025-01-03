@@ -11,14 +11,19 @@ import { MaterialModule } from './ui-material.module';
 import { FormsModule } from '@angular/forms';
 import { FormTemplatesComponent } from './components/form-templates/form-templates.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormPreviewDialogComponent } from './components/form-preview-dialog/form-preview-dialog.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    FormTemplatesComponent
-
+    FormTemplatesComponent,
+    FormPreviewDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     HttpClientModule,
     MaterialModule,
     FormsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatIconModule
   ],
   providers: [
     provideClientHydration(withEventReplay()),
