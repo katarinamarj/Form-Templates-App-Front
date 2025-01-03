@@ -6,23 +6,31 @@ import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-form-templates',
   standalone: false,
-  
   templateUrl: './form-templates.component.html',
-  styleUrl: './form-templates.component.css'
+  styleUrls: ['./form-templates.component.css']
 })
-export class FormTemplatesComponent implements OnInit, AfterViewInit{
+export class FormTemplatesComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'description', 'actions'];
   formTemplates: any[] = [];
-  newFormTemplate = { id: null, name: '', description: '' };
+  newFormTemplate: { 
+    id: number | null; 
+    name: string; 
+    description: string; 
+    fields: { label: string; type: string; options: string }[] 
+  } = { 
+    id: null, 
+    name: '', 
+    description: '', 
+    fields: [] 
+  };
+  newField = { label: '', type: '', options: '' };
   errorMessage: string | null = null;
-
   dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-
   constructor(private formTemplateService: FormTemplateService) {}
-  
+
   ngOnInit(): void {
     this.loadFormTemplates();
   }
@@ -35,50 +43,66 @@ export class FormTemplatesComponent implements OnInit, AfterViewInit{
     this.formTemplateService.getFormTemplates().subscribe(data => {
       this.dataSource.data = data;
     });
-
   }
 
-
-saveTemplate(): void {
-
-  if (!this.newFormTemplate.name) {
-    this.errorMessage = 'Name is required.';
-    return;
+  saveTemplate(): void {
+    if (this.newFormTemplate.id) {
+      this.formTemplateService.updateFormTemplate(this.newFormTemplate).subscribe(() => {
+        this.resetForm();
+        this.loadFormTemplates();
+      });
+    } else {
+      this.formTemplateService.createFormTemplate(this.newFormTemplate).subscribe(() => {
+        this.resetForm();
+        this.loadFormTemplates();
+      });
+    }
   }
 
-  if (this.newFormTemplate.description.length > 250) {
-    this.errorMessage = 'Description cannot exceed 250 characters.';
-    return;
+  resetForm(): void {
+    this.newFormTemplate = { id: null, name: '', description: '', fields: [] };
+    this.newField = { label: '', type: '', options: '' };
+    this.errorMessage = null;
   }
 
-
-  if (this.newFormTemplate.id) {
-    this.formTemplateService.updateFormTemplate(this.newFormTemplate).subscribe(() => {
-      this.newFormTemplate = { id: null, name: '', description: '' }; 
-      this.loadFormTemplates();
-      this.errorMessage = null;
-    });
-  } else {
-    this.formTemplateService.createFormTemplate(this.newFormTemplate).subscribe(() => {
-      this.newFormTemplate = { id: null, name: '', description: '' };
-      this.loadFormTemplates(); 
-      this.errorMessage = null;
-    });
-  }
-}
   
-editTemplate(template: any): void {
-  this.newFormTemplate = { ...template }; 
-}
-
-deleteTemplate(id: number): void {
-  if (confirm('Are you sure you want to delete this template?')) {
-    this.formTemplateService.deleteFormTemplate(id).subscribe(() => {
-      this.loadFormTemplates(); 
-    });
+  editTemplate(template: any): void {
+    this.newFormTemplate = { ...template };
   }
-}
-  
-  
-  
+
+
+  deleteTemplate(id: number): void {
+    if (confirm('Are you sure you want to delete this template?')) {
+      this.formTemplateService.deleteFormTemplate(id).subscribe(() => {
+        this.loadFormTemplates();
+      });
+    }
+  }
+
+  addField(): void {
+    if (!this.newField.label || !this.newField.type) {
+      alert('Field label and type are required.');
+      return;
+    }
+
+    this.newFormTemplate.fields.push({ ...this.newField });
+    this.newField = { label: '', type: '', options: '' };
+    this.newFormTemplate.fields = [...this.newFormTemplate.fields]; 
+  }
+
+
+  editField(field: any): void {
+    this.newField = { ...field };
+    this.newFormTemplate.fields = this.newFormTemplate.fields.filter(f => f !== field);
+  }
+
+
+  deleteField(field: any): void {
+    if (this.newFormTemplate.id && field.id) {
+      this.formTemplateService.deleteField(this.newFormTemplate.id, field.id).subscribe(() => {
+        this.newFormTemplate.fields = this.newFormTemplate.fields.filter(f => f !== field);
+      });
+    }
+  }
+
 }

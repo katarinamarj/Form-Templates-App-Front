@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -16,6 +17,8 @@ import { MatPaginatorModule } from "@angular/material/paginator";
         MatButtonModule,
         MatTableModule,
         MatPaginatorModule,
+        MatSelectModule,
+        
           
     ],
     exports:[
@@ -25,6 +28,8 @@ import { MatPaginatorModule } from "@angular/material/paginator";
         MatButtonModule,
         MatTableModule,
         MatPaginatorModule,
+        MatSelectModule,
+        
         
     ]
 })
