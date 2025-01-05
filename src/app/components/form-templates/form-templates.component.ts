@@ -48,6 +48,10 @@ export class FormTemplatesComponent implements OnInit, AfterViewInit {
   }
 
   saveTemplate(): void {
+    if (!this.newFormTemplate.name) {
+      alert('Name is required!');  
+      return;  
+    }
     if (this.newFormTemplate.id) {
       this.formTemplateService.updateFormTemplate(this.newFormTemplate).subscribe(() => {
         this.resetForm();
