@@ -37,7 +37,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule
   ],
   providers: [
-    provideClientHydration(withEventReplay()),
+    provideHttpClient(withFetch()),
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

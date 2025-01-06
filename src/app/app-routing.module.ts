@@ -8,7 +8,7 @@ import { FormPreviewDialogComponent } from './components/form-preview-dialog/for
 const routes: Routes = [
   {path: 'login', component:LoginComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
-  {path: 'form-template', component:FormTemplatesComponent},
+  {path: 'templates', component:FormTemplatesComponent},
   {path: 'preview', component: FormPreviewDialogComponent}
 ];
 

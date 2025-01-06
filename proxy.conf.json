@@ -2,7 +2,14 @@
     "/form-templates": {
       "target": "https://127.0.0.1:8000",
       "secure": false,
-      "changeOrigin": true
+      "changeOrigin": true,
+      "logLevel": "debug"
+    },
+    "/form-answer": {
+      "target": "https://127.0.0.1:8000",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
     }
   }
   

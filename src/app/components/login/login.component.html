@@ -1,6 +1,6 @@
 <section fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" style="margin-bottom: 6.5rem;">
     <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="1rem" style="margin-top: 5rem;">
-      <form #f="ngForm" (ngSubmit)="onSubmit(f)" fxLayout="column">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)" fxLayout="column" fxLayoutAlign="center center" fxLayoutAlign.xs="center center">
         <mat-form-field style="width: 300px;">
           <input
             type="text"
@@ -31,7 +31,7 @@
           type="submit"
           mat-raised-button
           color="primary"
-          style="margin-top: 10px; background-color: rgb(59, 48, 49); width: 200px;">
+          style="margin-top: 10px; ">
           Login
         </button>
 

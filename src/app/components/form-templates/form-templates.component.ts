@@ -115,7 +115,10 @@ export class FormTemplatesComponent implements OnInit, AfterViewInit {
     this.dialog.open(FormPreviewDialogComponent, {
       width: '70%',  
       height: '70%',  
-      data: { fields: template.fields }  
+      data: { 
+        fields: template.fields,  
+        formTemplateId: template.id 
+      } 
     });
   }
   
