@@ -22,7 +22,7 @@ export class LoginComponent {
       this.authService.login(username, password).subscribe({
         next: (response: any) => {
           this.authService.storeToken(response.token);
-          this.router.navigate(['/form-template']);
+          this.router.navigate(['/templates']);
         },
         error: (error) => {
           this.errorMessage = 'Invalid username or password.';

@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { FormPreviewDialogComponent } from '../form-preview-dialog/form-preview-dialog.component';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-templates',
@@ -31,7 +33,8 @@ export class FormTemplatesComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private formTemplateService: FormTemplateService,  public dialog: MatDialog) {}
+  constructor(private formTemplateService: FormTemplateService,  public dialog: MatDialog, private authService: AuthService, private router: Router) {}
+
 
   ngOnInit(): void {
     this.loadFormTemplates();
@@ -120,6 +123,11 @@ export class FormTemplatesComponent implements OnInit, AfterViewInit {
         formTemplateId: template.id 
       } 
     });
+  }
+  
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
   
 

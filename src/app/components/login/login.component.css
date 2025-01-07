@@ -1,5 +1,5 @@
 form {
-  margin-top: 7rem; 
+  margin-top: 45%; 
 }
   
 button {
@@ -32,4 +32,8 @@ section {
   font-weight: bold; 
   text-align: center; 
   max-width: 300px; 
+}
+
+h2{
+  text-align: center;
 }
