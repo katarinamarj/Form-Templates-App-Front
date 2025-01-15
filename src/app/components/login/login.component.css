@@ -1,5 +1,5 @@
 form {
-  margin-top: 45%; 
+  margin-top: 20%; 
 }
   
 button {
@@ -10,6 +10,7 @@ button {
   cursor: pointer; 
   transition: background-color 0.3s ease; 
   width: 20%;
+  margin-bottom: 20%;
 }
 
 button:hover {
@@ -19,8 +20,12 @@ button:hover {
 section {
   display: flex;
   justify-content: center; 
+  margin-top: 5%;
   margin-left: 20%;
   margin-right: 20%; 
+  border-radius: 8px; 
+  background-color: #f9f9f9; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
 
 
@@ -34,6 +39,8 @@ section {
   max-width: 300px; 
 }
 
-h2{
+h1{
   text-align: center;
+  font-family: 'FreeMono', monospace;
+  color:rgb(43, 76, 109);
 }

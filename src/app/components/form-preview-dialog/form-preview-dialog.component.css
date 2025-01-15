@@ -110,6 +110,10 @@ input[type="checkbox"]:hover {
   border: 1px solid #555; 
 }
 
+h2{
+  font-family: 'FreeMono', monospace;
+  color:rgb(43, 76, 109);
+}
   
   
 

@@ -17,7 +17,6 @@ export class FormTemplateService {
   }
 
   createFormTemplate(data: any): Observable<any> {
-    console.log('Sending request to backend:', data); 
     return this.http.post<any>(this.apiUrl, data).pipe(
       catchError(this.handleError)
     );

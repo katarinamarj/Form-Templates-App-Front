@@ -54,11 +54,14 @@
 
     </form>
 
-    <div class="button-container">
-    <button type="submit" mat-raised-button color="primary" (click)="saveTemplate()" style="margin-top: 10px; width: 20%;">
-      {{ newFormTemplate.id ? 'Update template' : 'Create template' }}
-    </button>
+    <div class="button-container" style="display: flex; justify-content: center; align-items: center; margin-top: 10px; width: 100%;">
+      @if (newFormTemplate.id) {
+        <button type="submit" mat-raised-button color="primary" (click)="saveTemplate()">Update template</button>
+      } @else {
+        <button type="submit" mat-raised-button color="primary" (click)="saveTemplate()">Create template</button>
+      }
     </div>
+    
 
     <div class="field-table">
       <!-- TABLE -->
